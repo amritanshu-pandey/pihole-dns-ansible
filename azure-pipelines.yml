@@ -23,8 +23,8 @@ steps:
 
 - script: |
     cp tests/test.yml .
-    ln -s . ../pihole-dns-ansible
-    echo '[defaults]\nroles_path="../"' > ansible.cfg
+    ln -s "$(pwd)" ../pihole-dns-ansible
+    echo -e '[defaults]\nroles_path="../"' > ansible.cfg
     cat ansible.cfg
     ls -lrtah 
     ls -lrtah ..
