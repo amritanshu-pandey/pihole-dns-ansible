@@ -1,31 +1,53 @@
-Role Name
-=========
+Pihole Personal DNS
+===================
 
-A brief description of the role goes here.
+Manage personal DNS entries using Pihole
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Pihole
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- `pihole_dns_lan_list_file`: File where Pihole custom DNS entries should be managed [default - /etc/pihole/lan.list]
+- `pihole_dns_dnsmasq_conf`: Pihole internal dnsmasq config file for managin personal DNS [default - /etc/dnsmasq.d/02-lan.conf]
+- `pihole_dns_entries`: Custom DNS entries in the following format:
+    ```yml
+    pihole_dns_entries:
+      - ip: 192.168.1.3
+        fqdn: random.example.com
+        host: random
+    ```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yml
+---
+- hosts: pihole.example.com
+  name: Update pihole DNS entries
+  become: true
+  connection: remote
+  vars:
+    pihole_dns_entries:
+      - ip: 192.168.1.2
+        fqdn: random.example.com
+        host: random
+      - ip: 192.168.1.3
+        fqdn: anotherrandom.example.com
+        host: anotherrandom
+  roles:
+    - pihole-personal-dns 
+```
 
 License
 -------
@@ -35,4 +57,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Name: Amritanshu Pandey <email@amritanshu.in>
