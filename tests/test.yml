@@ -1,5 +1,20 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: 127.0.0.1
+  name: test the role
+  become: false
+  connection: local
+  vars:
+    pihole_dns_lan_list_file: /tmp/a
+    pihole_dns_dnsmasq_conf: /tmp/b
+    pihole_dns_entries:
+      - ip: 1.2.3.4
+        fqdn: tomato.acme
+        host: tomato
+      - ip: 1.2.3.5
+        fqdn: mango.acme
+        host: mango
+      - ip: 1.2.3.6
+        fqdn: mango.acme
+        host: mango
   roles:
-    - pihole-personal-dns
+    - pihole-personal-dns 
