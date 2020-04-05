@@ -1,0 +1,22 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    pip install ansible
+    ansible --version
+  displayName: 'Prepare'
+
+- script: |
+    cp tests/test.yml .
+    echo '[defaults]\nroles_path="../"'
+    ansible-playbook test.yml --syntax-check
+  displayName: 'Run test pipeline'
