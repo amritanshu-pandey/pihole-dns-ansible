@@ -1,5 +1,4 @@
 ---
-# tasks file for pihole-personal-dns
 - name: create-dnsmasq-config
   blockinfile:
     path: "{{ pihole_dns_dnsmasq_conf }}"
@@ -15,4 +14,8 @@
     regexp: "{{ item.host }}"
     line: "{{ item.ip }} {{ item.fqdn }} {{ item.host }}"
   with_items: "{{ pihole_dns_entries }}"
+  register: entries_updated
 
+- name: restart pihole dns resolver
+  shell: pihole restartdns
+  when: entries_updated.changed
