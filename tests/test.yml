@@ -17,4 +17,4 @@
         fqdn: mango.acme
         host: mango
   roles:
-    - pihole-personal-dns 
+    - pihole-dns-ansible
