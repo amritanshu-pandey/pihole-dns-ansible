@@ -11,7 +11,7 @@
     path: "{{ pihole_dns_lan_list_file }}"
     backup: yes
     create: yes
-    regexp: "{{ item.host }}"
+    regexp: "^{{ item.host }}$"
     line: "{{ item.ip }} {{ item.fqdn }} {{ item.host }}"
   with_items: "{{ pihole_dns_entries }}"
   register: entries_updated
