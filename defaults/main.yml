@@ -1,0 +1,4 @@
+---
+# defaults file for pihole-personal-dns
+pihole_dns_lan_list_file: /etc/pihole/lan.list
+pihole_dns_dnsmasq_conf: /etc/dnsmasq.d/02-lan.conf

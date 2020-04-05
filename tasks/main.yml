@@ -1,0 +1,18 @@
+---
+# tasks file for pihole-personal-dns
+- name: create-dnsmasq-config
+  blockinfile:
+    path: "{{ pihole_dns_dnsmasq_conf }}"
+    create: yes
+    backup: yes
+    block: "addn-hosts={{ pihole_dns_lan_list_file }}"
+
+- name: edit-lan-dns-entries
+  lineinfile:
+    path: "{{ pihole_dns_lan_list_file }}"
+    backup: yes
+    create: yes
+    regexp: "{{ item.host }}"
+    line: "{{ item.ip }} {{ item.fqdn }} {{ item.host }}"
+  with_items: "{{ pihole_dns_entries }}"
+
