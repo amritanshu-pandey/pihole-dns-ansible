@@ -23,6 +23,6 @@ steps:
 
 - script: |
     cp tests/test.yml .
-    echo '[defaults]\nroles_path="../"'
+    echo '[defaults]\nroles_path="../"' > ansible.cfg
     ansible-playbook test.yml --syntax-check
   displayName: 'Run test pipeline'
