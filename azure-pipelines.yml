@@ -25,5 +25,8 @@ steps:
     cp tests/test.yml .
     ln -s . ../pihole-dns-ansible
     echo '[defaults]\nroles_path="../"' > ansible.cfg
+    cat ansible.cfg
+    ls -lrtah 
+    ls -lrtah ..
     ansible-playbook test.yml --syntax-check
   displayName: 'Run test pipeline'
