@@ -6,6 +6,13 @@
     backup: yes
     block: "addn-hosts={{ pihole_dns_lan_list_file }}"
 
+- name: cleanup existing DNS entries
+  copy:
+    backup: yes
+    content: ""
+    dest: "{{ pihole_dns_lan_list_file }}"
+  when: pihole_cleanup_other_dns_entries
+
 - name: edit-lan-dns-entries
   lineinfile:
     path: "{{ pihole_dns_lan_list_file }}"
